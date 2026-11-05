@@ -1,11 +1,11 @@
-# ============================================
+﻿# ============================================
 # WORKFLOW: CI Pipeline Multistage
 # ============================================
 name: 🔄 CI Multistage Pipeline
 
 on:
-  # push:
-  #   branches: [ main ]
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 env:
@@ -98,7 +98,6 @@ jobs:
         working-directory: app
         run: npm run build
       
-      # Upload dos arquivos buildados para próximo stage
       - name: 📤 Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -115,7 +114,6 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     steps:
-      # Download do artifact do job anterior
       - name: 📥 Download artifacts
         uses: actions/download-artifact@v4
         with:
